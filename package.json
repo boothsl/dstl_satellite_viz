@@ -1,0 +1,22 @@
+{
+  "name": "dstl_satellite_viz",
+  "version": "0.0.0",
+  "description": "Visualization of data from the DSTL Satellite Imagery Feature Detection Kaggle Competition",
+  "main": "index.js",
+  "dependencies": {
+    "d3": "~4.7.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/boothsl/dstl_satellite_viz.git"
+  },
+  "author": "Stephanie Booth",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/boothsl/dstl_satellite_viz/issues"
+  }
+}
