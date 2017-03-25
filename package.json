@@ -4,7 +4,8 @@
   "description": "Visualization of data from the DSTL Satellite Imagery Feature Detection Kaggle Competition",
   "main": "index.js",
   "dependencies": {
-    "d3": "~4.7.3"
+    "d3": "~4.7.3",
+    "express": "~4.15.2"
   },
   "devDependencies": {},
   "scripts": {
