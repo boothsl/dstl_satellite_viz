@@ -1,32 +1,12 @@
-function overlayFunc() {
-  let overlays = document.getElementById('overlays');
-  if(overlays.style.visibility == 'hidden') {
-    overlays.style.visibility = 'visible';
-  }
-  else {
-    overlays.style.visibility = 'hidden';
-  }
-
-}
 window.onload = function(){
   //var fs = require('fs');
   //var files = fs.readdirSync('./data/6040_2_2');
   let svg = d3.select('svg')
-  .attr('width', '789px')
-  .attr('height', '779px')
+  .attr('width', '1089px')
+  .attr('height', '1079px')
   .attr('padding', '0px 0px 0px 0px');
 
-  svg.append('image')
-  .attr('x', 0)
-  .attr('y', 0)
-  .attr('width', '100%')
-  .attr('height', '100%')
-  .attr('xlink:href','./img/6040_2_2b.png');
-
-  let overlays = svg.append('g')
-    .attr('id', 'overlays')
-
-  const data =[
+  const data = [
     {
       foldername: "6040_2_2",
       files: [
@@ -43,36 +23,112 @@ window.onload = function(){
           color: "lightgreen"
         }
       ]
+    },
+    {
+      foldername: "6040_2_2b",
+      files: [
+        {
+          filename: "002_TR_L6_FOOTPATH_TRAIL",
+          color: "red"
+        },
+        {
+          filename: "006_VEG_L5_GROUP_TREES",
+          color: "blue"
+        },
+        {
+          filename: "006_VEG_L5_STANDALONE_TREES",
+          color: "lightblue"
+        }
+      ]
     }
+  ];
+
+  const imagePaths = [
+    './img/6040_2_2.png',
+    './img/6040_2_2b.png'
   ]
-  data.forEach(folder => {
-    folder.files.forEach(file => {
-      d3.json('./data/'+folder.foldername+'/'+file.filename+'.geojson', function(error, data) {
-        data.features.forEach(feature => {
-          feature.geometry.coordinates.forEach(coord => {
-            coord.forEach(subCoord => {
-              subCoord[0] *= 789 /0.009158;
-              subCoord[1] *= -779 /0.009043;
+
+  data.forEach((folder, i) => {
+    let slide = svg.append('g')
+    .attr('class', 'slide')
+    .attr('id', i+1)
+    .style('visibility', 'hidden');
+
+    let imagePath = imagePaths.filter(imagePath => imagePath.includes(folder.foldername))[0];
+
+    slide.append('image')
+    .attr('xlink:href', imagePath);
+
+      folder.files.forEach(file => {
+        d3.json('./data/'+folder.foldername+'/'+file.filename+'.geojson', function(error, data) {
+          data.features.forEach(feature => {
+            feature.geometry.coordinates.forEach(coord => {
+              coord.forEach(subCoord => {
+                subCoord[0] *= 789 /0.009158;
+                subCoord[1] *= -779 /0.009043;
+              });
             });
           });
+          let overlays = slide.append('g')
+          .attr('class', 'overlays');
+
+          let path = d3.geoPath();
+          overlays.selectAll('path')
+          .data(data.features)
+          .enter()
+          .append('path')
+          .attr('d', path)
+          .attr('fill', file.color)
+          .attr('stroke', 'black')
+          .attr('stroke-width', '1');
         });
-        console.log(data);
-
-        let path = d3.geoPath();
-
-        overlays.append('g').selectAll('path')
-        .data(data.features)
-        .enter()
-        //.attr('x', 100)
-        //.attr('y', 100)
-        .append('path')
-        .attr('d', path)
-        .attr('fill', file.color)
-        .attr('stroke', 'black')
-        .attr('stroke-width', '1');
-
       });
     });
-  });
 
+  $('#start').on('click', () => {
+    const slides = $('.slide').toArray();
+    let newSlide = slides[slides.length-1];
+    newSlide.style.visibility = 'visible';
+
+    $('#overlayToggle').on('click', () => {
+      $('.overlays').toggle()
+    });
+
+    d3.select('#next').on('click', () => {
+      let oldSlide = newSlide;
+      if (slides.length-1 == slides.indexOf(oldSlide)){
+        newSlide = slides[0];
+      } else {
+        newSlide = slides[slides.indexOf(oldSlide) + 1];
+      }
+      newSlide.style.visibility = 'visible';
+      d3.select(oldSlide).transition()
+        .duration(500)
+        .attr('transform', "translate(-1000, 0)")
+        .on('end', function(){
+          oldSlide.parentNode.prepend(oldSlide);
+          oldSlide.style.visibility = 'hidden';
+          oldSlide.setAttribute('transform', "translate(0, 0)");
+        });
+      });
+
+    $('#previous').on('click', () => {
+      let oldSlide = newSlide;
+      if (slides.indexOf(oldSlide) == 0){
+        newSlide = slides[slides.length-1];
+      } else{
+        newSlide = slides[slides.indexOf(oldSlide) - 1];
+      }
+      newSlide.style.visibility = 'visible';
+      d3.select(oldSlide).transition()
+        .duration(500)
+        .attr('transform', "translate(2000, 0)")
+        .on('end', function(){
+          oldSlide.parentNode.prepend(oldSlide);
+          oldSlide.style.visibility = 'hidden';
+          oldSlide.setAttribute('transform', "translate(0, 0)");
+        });
+    });
+
+  });
 };
