@@ -43,8 +43,8 @@ window.onload = function(){
           data.features.forEach(feature => {
             feature.geometry.coordinates.forEach(coord => {
               coord.forEach(subCoord => {
-                subCoord[0] *= 86154.18213583753;
-                subCoord[1] *= -86143.97876810792;
+                subCoord[0] *= folder.xFactor;
+                subCoord[1] *= folder.yFactor;
               });
             });
           });
