@@ -6,219 +6,22 @@ window.onload = function(){
   .attr('height', '1079px')
   .attr('padding', '0px 0px 0px 0px');
 
-  const data = [
-    {
-      foldername: "6040_2_2",
-      xFactor: 86154.18213583753,
-      yFactor: -86143.97876810792,
-      files: [
-        {
-          filename: "002_TR_L6_FOOTPATH_TRAIL",
-          color: "orange"
-        },
-        {
-          filename: "006_VEG_L5_GROUP_TREES",
-          color: "green"
-        },
-        {
-          filename: "006_VEG_L5_STANDALONE_TREES",
-          color: "lightgreen"
-        }
-      ]
-    },
-    {
-      foldername: "6060_2_3",
-      xFactor: 86090.55289508055,
-      yFactor: -86172.56637168142,
-      files: [
-        {
-          filename: "002_TR_L6_FOOTPATH_TRAIL",
-          color: "orange"
-        },
-        {
-          filename: "006_VEG_L5_GROUP_TREES",
-          color: "green"
-        },
-        {
-          filename: "006_VEG_L5_STANDALONE_TREES",
-          color: "lightgreen"
-        },
-        {
-          filename: "001_MM_L3_EXTRACTION_MINE",
-          color: "gray"
-        },
-        {
-          filename: "001_MM_L3_RESIDENTIAL_BUILDING",
-          color: "indianred"
-        },
-        {
-          filename: "001_MM_L5_MISC_SMALL_STRUCTURE",
-          color: "purple"
-        },
-        {
-          filename: "002_TR_L4_POOR_DIRT_CART_TRACK",
-          color: "burlywood"
-        },
-        {
-          filename: "003_VH_L5_SMALL_VEHICLE",
-          color: "orchid"
-        },
-        {
-          filename: "006_VEG_L3_HEDGEROWS",
-          color: "yellow"
-        },
-        {
-          filename: "007_AGR_L6_ROW_CROP",
-          color: "darkolivegreen"
-        },
-        {
-          filename: "007_AGR_L7_FARM_ANIMALS_IN_FIELD",
-          color: "pink"
-        },
-        {
-          filename: "008_WTR_L3_DRY_RIVERBED",
-          color: "aqua"
-        }
-
-      ]
-    },
-    {
-      foldername: "6070_2_3",
-      xFactor: 86212.63564343251,
-      yFactor: -86124.9309010503,
-      files: [
-        {
-          filename: "002_TR_L3_GOOD_ROADS",
-          color: "fuchsia"
-        },
-        {
-          filename: "006_VEG_L5_GROUP_TREES",
-          color: "green"
-        },
-        {
-          filename: "006_VEG_L5_STANDALONE_TREES",
-          color: "lightgreen"
-        },
-        {
-          filename: "003_VH_L4_AQUATIC_SMALL",
-          color: "navy"
-        },
-        {
-          filename: "001_MM_L3_RESIDENTIAL_BUILDING",
-          color: "indianred"
-        },
-        {
-          filename: "001_MM_L5_MISC_SMALL_STRUCTURE",
-          color: "purple"
-        },
-        {
-          filename: "003_VH_L6_MOTORBIKE",
-          color: "deeppink"
-        },
-        {
-          filename: "003_VH_L5_SMALL_VEHICLE",
-          color: "orchid"
-        },
-        {
-          filename: "006_VEG_L2_SCRUBLAND",
-          color: "goldenrod"
-        },
-        {
-          filename: "006_VEG_L2_WOODLAND",
-          color: "forestgreen"
-        },
-        {
-          filename: "008_WTR_L2_STANDING_WATER",
-          color: "deepskyblue"
-        },
-        {
-          filename: "008_WTR_L3_WATERWAY",
-          color: "dodgerblue"
-        }
-
-      ]
-    },
-    {
-      foldername: "6100_1_3",
-      xFactor: 86173.001310616,
-      yFactor: -86153.50586153506,
-      files: [
-        {
-          filename: "002_TR_L3_GOOD_ROADS",
-          color: "fuchsia"
-        },
-        {
-          filename: "006_VEG_L5_GROUP_TREES",
-          color: "green"
-        },
-        {
-          filename: "006_VEG_L5_STANDALONE_TREES",
-          color: "lightgreen"
-        },
-        {
-          filename: "001_MM_L3_NON_RESIDENTIAL_BUILDING",
-          color: "hotpink"
-        },
-        {
-          filename: "001_MM_L3_RESIDENTIAL_BUILDING",
-          color: "indianred"
-        },
-        {
-          filename: "001_MM_L5_MISC_SMALL_STRUCTURE",
-          color: "purple"
-        },
-        {
-          filename: "003_VH_L6_MOTORBIKE",
-          color: "deeppink"
-        },
-        {
-          filename: "003_VH_L5_SMALL_VEHICLE",
-          color: "orchid"
-        },
-        {
-          filename: "002_TR_L4_POOR_DIRT_CART_TRACK",
-          color: "burlywood"
-        },
-        {
-          filename: "002_TR_L6_FOOTPATH_TRAIL",
-          color: "orange"
-        },
-        {
-          filename: "008_WTR_L2_STANDING_WATER",
-          color: "deepskyblue"
-        },
-        {
-          filename: "007_AGR_L6_ROW_CROP",
-          color: "darkolivegreen"
-        },
-        {
-          filename: "004_UPI_L5_PYLONS",
-          color: "darkgray"
-        },
-        {
-          filename: "004_UPI_L6_SATELLITE_DISHES_DISH_AERIAL",
-          color: "silver"
-        },
-        {
-          filename: "005_VO_L6_MASTS_RADIO_TOWER",
-          color: "dimgrey"
-        },
-      ]
-    }
-  ];
+  //const data = $.getJSON("folderStruct.json");
 
   const imagePaths = [
     './img/6040_2_2.png',
-    './img/6040_2_2b.png'
+    './img/6060_2_3.png',
+    './img/6070_2_3.png',
+    './img/6100_1_3.png'
   ]
-
-  data.forEach((folder, i) => {
+  $.getJSON("./data/folderStruct.json", (data) => {
+    data.forEach((folder, i) => {
     let slide = svg.append('g')
     .attr('class', 'slide')
     .attr('id', i+1)
     .style('visibility', 'hidden');
 
-    let imagePath = imagePaths.filter(imagePath => imagePath.includes(folder.foldername))[0];
+    let imagePath = imagePaths.find(imagePath => imagePath.includes(folder.foldername));
 
     slide.append('image')
     .attr('xlink:href', imagePath);
@@ -248,6 +51,7 @@ window.onload = function(){
         });
       });
     });
+  });
 
   $('#start').on('click', () => {
     const slides = $('.slide').toArray();
