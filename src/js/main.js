@@ -2,8 +2,8 @@ window.onload = function(){
   //var fs = require('fs');
   //var files = fs.readdirSync('./data/6040_2_2');
   let svg = d3.select('svg')
-  .attr('width', '1089px')
-  .attr('height', '1079px')
+  .attr('width', '750px')
+  .attr('height', '750px')
   .attr('padding', '0px 0px 0px 0px');
 
   //const data = $.getJSON("folderStruct.json");
@@ -23,16 +23,28 @@ window.onload = function(){
 
     let imagePath = imagePaths.find(imagePath => imagePath.includes(folder.foldername));
 
-    slide.append('image')
-    .attr('xlink:href', imagePath);
+    let imgElem = slide.append('image')
+    let img = new Image();
+    img.src = imagePath;
+    img.onload = (img) => { //Images are defaulting to 0,0 on some browsers. So this is a workaround
+      let width = img.srcElement.width;
+      let height = img.srcElement.height;
+      imgElem.attr('height', height)
+      .attr('width', width)
+      .attr('xlink:href', imagePath);
+    };
+
+    //.attr('xlink:href', imagePath)
+    //.attr('width', '750px')
+    //.attr('height', '750px');
 
       folder.files.forEach(file => {
         d3.json('./data/'+folder.foldername+'/'+file.filename+'.geojson', function(error, data) {
           data.features.forEach(feature => {
             feature.geometry.coordinates.forEach(coord => {
               coord.forEach(subCoord => {
-                subCoord[0] *= 789 /0.009158;
-                subCoord[1] *= -779 /0.009043;
+                subCoord[0] *= 86154.18213583753;
+                subCoord[1] *= -86143.97876810792;
               });
             });
           });
