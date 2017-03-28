@@ -2,8 +2,8 @@ window.onload = function(){
   //var fs = require('fs');
   //var files = fs.readdirSync('./data/6040_2_2');
   let svg = d3.select('svg')
-  .attr('width', '750px')
-  .attr('height', '750px')
+  .attr('width', '100%')
+  .attr('height', '1000')
   .attr('padding', '0px 0px 0px 0px');
 
   //const data = $.getJSON("folderStruct.json");
@@ -18,8 +18,8 @@ window.onload = function(){
     data.forEach((folder, i) => {
     let slide = svg.append('g')
     .attr('class', 'slide')
-    .attr('id', i+1)
-    .style('visibility', 'hidden');
+    .attr('id', i)
+    .attr('visibility', 'hidden');
 
     let imagePath = imagePaths.find(imagePath => imagePath.includes(folder.foldername));
 
@@ -67,8 +67,8 @@ window.onload = function(){
 
   $('#start').on('click', () => {
     const slides = $('.slide').toArray();
+    slides.forEach(x => x.style.visibility = 'visible');
     let newSlide = slides[slides.length-1];
-    newSlide.style.visibility = 'visible';
 
     $('#overlayToggle').on('click', () => {
       $('.overlays').toggle()
@@ -76,39 +76,38 @@ window.onload = function(){
 
     d3.select('#next').on('click', () => {
       let oldSlide = newSlide;
-      if (slides.length-1 == slides.indexOf(oldSlide)){
-        newSlide = slides[0];
+      if (slides.indexOf(oldSlide) == 0){
+        newSlide = slides[slides.length-1];
       } else {
-        newSlide = slides[slides.indexOf(oldSlide) + 1];
+        newSlide = slides[slides.indexOf(oldSlide) - 1];
       }
-      newSlide.style.visibility = 'visible';
       d3.select(oldSlide).transition()
         .duration(500)
-        .attr('transform', "translate(-1000, 0)")
+        .attr('transform', "translate(1000, 0)")
         .on('end', function(){
           oldSlide.parentNode.prepend(oldSlide);
-          oldSlide.style.visibility = 'hidden';
-          oldSlide.setAttribute('transform', "translate(0, 0)");
-        });
+        })
+        .transition()
+          .duration(500)
+          .attr('transform', "translate(0, 0)")
       });
 
     $('#previous').on('click', () => {
       let oldSlide = newSlide;
-      if (slides.indexOf(oldSlide) == 0){
-        newSlide = slides[slides.length-1];
+      if (slides.indexOf(oldSlide) == slides.length-1){
+        newSlide = slides[0];
       } else{
-        newSlide = slides[slides.indexOf(oldSlide) - 1];
+        newSlide = slides[slides.indexOf(oldSlide) + 1];
       }
-      newSlide.style.visibility = 'visible';
-      d3.select(oldSlide).transition()
+      d3.select(newSlide).transition()
         .duration(500)
-        .attr('transform', "translate(2000, 0)")
+        .attr('transform', "translate(1000, 0)")
         .on('end', function(){
-          oldSlide.parentNode.prepend(oldSlide);
-          oldSlide.style.visibility = 'hidden';
-          oldSlide.setAttribute('transform', "translate(0, 0)");
-        });
+          newSlide.parentNode.append(newSlide);
+        })
+        .transition()
+          .duration(500)
+          .attr('transform', "translate(0, 0)");
     });
-
   });
 };
