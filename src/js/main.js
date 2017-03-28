@@ -9,12 +9,12 @@ window.onload = function(){
   //const data = $.getJSON("folderStruct.json");
 
   const imagePaths = [
-    './img/6040_2_2.png',
-    './img/6060_2_3.png',
-    './img/6070_2_3.png',
-    './img/6100_1_3.png'
+    'src/img/6040_2_2.png',
+    'src/img/6060_2_3.png',
+    'src/img/6070_2_3.png',
+    'src/img/6100_1_3.png'
   ]
-  $.getJSON("./data/folderStruct.json", (data) => {
+  $.getJSON("src/data/folderStruct.json", (data) => {
     data.forEach((folder, i) => {
     let slide = svg.append('g')
     .attr('class', 'slide')
@@ -39,7 +39,7 @@ window.onload = function(){
     //.attr('height', '750px');
 
       folder.files.forEach(file => {
-        d3.json('./data/'+folder.foldername+'/'+file.filename+'.geojson', function(error, data) {
+        d3.json('src/data/'+folder.foldername+'/'+file.filename+'.geojson', function(error, data) {
           data.features.forEach(feature => {
             feature.geometry.coordinates.forEach(coord => {
               coord.forEach(subCoord => {
@@ -85,7 +85,7 @@ window.onload = function(){
         .duration(500)
         .attr('transform', "translate(1000, 0)")
         .on('end', function(){
-          oldSlide.parentNode.prepend(oldSlide);
+          $(oldSlide.parentNode).prepend(oldSlide);
         })
         .transition()
           .duration(500)
@@ -103,7 +103,7 @@ window.onload = function(){
         .duration(500)
         .attr('transform', "translate(1000, 0)")
         .on('end', function(){
-          newSlide.parentNode.append(newSlide);
+          $(oldSlide.parentNode).append(newSlide);
         })
         .transition()
           .duration(500)
