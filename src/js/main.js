@@ -1,17 +1,14 @@
 $(document).ready(function() {
-	$('#fullpage').fullpage({
+  $('#fullpage').fullpage({
       sectionsColor: ['#33A0A0','#AAAAAA','#00AB00'],
       verticalCentered: true,
       paddingBottom: '4em'
   });
-  //var fs = require('fs');
-  //var files = fs.readdirSync('./data/6040_2_2');
-  let svg = d3.select('svg')
+
+  let svg = d3.selectAll('svg')
   .attr('width', '100%')
   .attr('height', '1000')
   .attr('padding', '0px 0px 0px 0px');
-
-  //const data = $.getJSON("folderStruct.json");
 
   const imagePaths = [
     'src/img/6040_2_2.png',
@@ -21,39 +18,54 @@ $(document).ready(function() {
   ]
   $.getJSON("src/data/folderStruct.json", (data) => {
     data.forEach((folder, i) => {
-    let slide = svg.append('g')
-    .attr('class', 'slide')
-    .attr('id', i)
-    .attr('visibility', 'hidden');
+    let slide = d3.select('#s'+(i+1) + ' .fp-tableCell');
 
     let imagePath = imagePaths.find(imagePath => imagePath.includes(folder.foldername));
 
-    let imgElem = slide.append('image')
+    let imgContainer = slide.append('div')
+    .attr('class', 'd3-img-container');
+
+    let svg = imgContainer.append('svg');
+
+    let imgElem = svg.append('image');
+
     let img = new Image();
+
+    let toggler = slide.append('button')
+    .attr('class','overlayToggle')
+    .text("Button")
+    .on('click', () => {
+      slide.selectAll('.overlays')
+      .style("visibility", function() {
+        return d3.select(this).style("visibility") == "hidden" ? 'visible' : 'hidden';
+      });
+
+    });
+
     img.src = imagePath;
     img.onload = (img) => { //Images are defaulting to 0,0 on some browsers. So this is a workaround
       let width = img.srcElement.width;
       let height = img.srcElement.height;
-      imgElem.attr('height', height)
-      .attr('width', width)
+      imgElem.attr('height', height*0.8)
+      .attr('width', width*0.8)
       .attr('xlink:href', imagePath);
+      imgContainer.style('height',height*0.8 + "px")
+      .style('width',width*0.8 + "px")
+      .style('margin', "auto")
+      ;
     };
-
-    //.attr('xlink:href', imagePath)
-    //.attr('width', '750px')
-    //.attr('height', '750px');
 
       folder.files.forEach(file => {
         d3.json('src/data/'+folder.foldername+'/'+file.filename+'.geojson', function(error, data) {
           data.features.forEach(feature => {
             feature.geometry.coordinates.forEach(coord => {
               coord.forEach(subCoord => {
-                subCoord[0] *= folder.xFactor;
-                subCoord[1] *= folder.yFactor;
+                subCoord[0] *= folder.xFactor*0.8;
+                subCoord[1] *= folder.yFactor*0.8;
               });
             });
           });
-          let overlays = slide.append('g')
+          let overlays = svg.append('g')
           .attr('class', 'overlays');
 
           let path = d3.geoPath();
@@ -67,52 +79,6 @@ $(document).ready(function() {
           .attr('stroke-width', '1');
         });
       });
-    });
-  });
-
-  $('#start').on('click', () => {
-    const slides = $('.slide').toArray();
-    slides.forEach(x => x.style.visibility = 'visible');
-    let newSlide = slides[slides.length-1];
-
-    $('#overlayToggle').on('click', () => {
-      $('.overlays').toggle()
-    });
-
-    d3.select('#next').on('click', () => {
-      let oldSlide = newSlide;
-      if (slides.indexOf(oldSlide) == 0){
-        newSlide = slides[slides.length-1];
-      } else {
-        newSlide = slides[slides.indexOf(oldSlide) - 1];
-      }
-      d3.select(oldSlide).transition()
-        .duration(500)
-        .attr('transform', "translate(1000, 0)")
-        .on('end', function(){
-          $(oldSlide.parentNode).prepend(oldSlide);
-        })
-        .transition()
-          .duration(500)
-          .attr('transform', "translate(0, 0)")
-      });
-
-    $('#previous').on('click', () => {
-      let oldSlide = newSlide;
-      if (slides.indexOf(oldSlide) == slides.length-1){
-        newSlide = slides[0];
-      } else{
-        newSlide = slides[slides.indexOf(oldSlide) + 1];
-      }
-      d3.select(newSlide).transition()
-        .duration(500)
-        .attr('transform', "translate(1000, 0)")
-        .on('end', function(){
-          $(oldSlide.parentNode).append(newSlide);
-        })
-        .transition()
-          .duration(500)
-          .attr('transform', "translate(0, 0)");
     });
   });
 });
