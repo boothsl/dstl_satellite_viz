@@ -1,0 +1,43 @@
+.section {
+  margin: auto;
+  width: 50%;
+}
+#dstl-img {
+  height: 33%;
+  margin: auto;
+  width: 50%;
+}
+#dstl-img img {
+  display: block;
+  height: 100%;
+  margin: auto;
+  width: auto;
+}
+#d3imgs {
+  height: 50%;
+  margin:auto;
+  max-width: 789px;
+  width: 50%;
+}
+h1 {
+  font-size: 3em;
+  text-align: center;
+  color: white;
+}
+h2 {
+  text-align: center;
+}
+p {
+  font-size: 2em;
+  margin: auto;
+  text-align: center;
+  width: 50%;
+}
+button {
+  display: block;
+  margin: 0 auto;
+  width: 10%;
+}
+svg {
+  max-width: 789px;
+}

@@ -1,4 +1,9 @@
-window.onload = function(){
+$(document).ready(function() {
+	$('#fullpage').fullpage({
+      sectionsColor: ['#33A0A0','#AAAAAA','#00AB00'],
+      verticalCentered: true,
+      paddingBottom: '4em'
+  });
   //var fs = require('fs');
   //var files = fs.readdirSync('./data/6040_2_2');
   let svg = d3.select('svg')
@@ -110,4 +115,4 @@ window.onload = function(){
           .attr('transform', "translate(0, 0)");
     });
   });
-};
+});
