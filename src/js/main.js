@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $('#fullpage').fullpage({
-      sectionsColor: ['#33A0A0','#AAAAAA','#00AB00'],
+      sectionsColor: ['#008080','#111111','#006A00'],
       verticalCentered: true,
       paddingBottom: '4em'
   });
@@ -33,7 +33,7 @@ $(document).ready(function() {
 
     let toggler = slide.append('button')
     .attr('class','overlayToggle')
-    .text("Button")
+    .text("Toggle Overlay")
     .on('click', () => {
       slide.selectAll('.overlays')
       .style("visibility", function() {
