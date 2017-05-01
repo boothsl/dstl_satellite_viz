@@ -12,7 +12,7 @@
         <div id="dstl-img">
           <img src="src/img/dstl_screenshot.png" alt="Kaggle screenshot">
         </div>
-        <p>Kaggle hosted a satellite imagery feature detection challenge in late 2016, and while it wasn't realistic to compete while I'm still learning the basics, it still posed a good exercise for applying the fundamentals of image processing and image analysis. I plan to return to this data set periodically as I learn more.</p>
+        <p>Kaggle hosted a <a href="https://www.kaggle.com/c/dstl-satellite-imagery-feature-detection">satellite imagery feature detection challenge</a> in late 2016, and while it wasn't realistic to compete while I'm still learning the basics, it still posed a good exercise for applying the fundamentals of image processing and image analysis. I plan to return to this data set periodically as I learn more.</p>
 
       </div>
       <div class="section" id="d3section">
@@ -31,7 +31,42 @@
       </div>
         <!-- <button id="start">START</button> -->
       <div class="section">
-      <h2>Analysis</h2>
+        <div class="slide">
+          <h2>Analysis (slide right)</h2>
+          <p>I wanted to start off small, so I tried to see what I could do with just the tree data</p>
+          <p>I started off performing Principle Component Analysis (PCA), a process entailing compressing the dimensions with minimal information loss to more easily find trends.</p>
+        </div>
+        <div class="slide">
+          <p>I did this and then divided my dataset between trees and not trees, and drew histograms of the two.</p>
+          <div class="analysis-mgs">
+            <figure>
+            <img src="src/img/analysis/hist_trees_0.png" alt="Trees Histogram of 0th dimension">
+            <figcaption>Figure 1: Histogram of Trees data on 0th Axis, RGB values</figcaption>
+          </figure>
+          <figure>
+            <img src="src/img/analysis/hist_notrees_0.png" alt="Non-trees Histogram of 0th dimension">
+            <figcaption>Figure 2: Histogram of Not Trees data on 0th Axis, RGB values</figcaption>
+          </figure>
+          </div>
+          <p>Unfortunately, the shapes of my histograms are too close to really differentiate.</p>
+        </div>
+        <div class="slide">
+          <p>So let's try some texture analysis then</p>
+          <div class="analysis-mgs">
+            <figure>
+            <img src="src/img/analysis/mask.png" alt="Locations of trees on one image">
+            <figcaption>Figure 3: Locations of trees on one image</figcaption>
+          </figure>
+          <figure>
+            <img src="src/img/analysis/corr.png" alt="Hits for texture analysis">
+            <figcaption>Figure 4: Hits for texture analysis</figcaption>
+          </figure>
+          </div>
+          <p>This isn't terrible until you get to the cities, where it really has trouble telling trees from non-trees.</p>
+        </div>
+        <div class="slide">
+
+        </div>
       </div>
     </div>
   </body>

@@ -46,13 +46,12 @@ $(document).ready(function() {
     img.onload = (img) => { //Images are defaulting to 0,0 on some browsers. So this is a workaround
       let width = img.srcElement.width;
       let height = img.srcElement.height;
-      imgElem.attr('height', height*0.8)
-      .attr('width', width*0.8)
+      imgElem.attr('height', height*0.7)
+      .attr('width', width*0.7)
       .attr('xlink:href', imagePath);
-      imgContainer.style('height',height*0.8 + "px")
-      .style('width',width*0.8 + "px")
-      .style('margin', "auto")
-      ;
+      imgContainer.style('height',height*0.7 + "px")
+      .style('width',width*0.7 + "px")
+      .style('margin', "auto auto 10px auto");
     };
 
       folder.files.forEach(file => {
@@ -60,8 +59,8 @@ $(document).ready(function() {
           data.features.forEach(feature => {
             feature.geometry.coordinates.forEach(coord => {
               coord.forEach(subCoord => {
-                subCoord[0] *= folder.xFactor*0.8;
-                subCoord[1] *= folder.yFactor*0.8;
+                subCoord[0] *= folder.xFactor*0.7;
+                subCoord[1] *= folder.yFactor*0.7;
               });
             });
           });
@@ -75,6 +74,7 @@ $(document).ready(function() {
           .append('path')
           .attr('d', path)
           .attr('fill', file.color)
+          .attr('opacity', 0.7)
           .attr('stroke', 'black')
           .attr('stroke-width', '1');
         });
