@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $('#fullpage').fullpage({
-      sectionsColor: ['#008080','#111111','#006A00'],
+      sectionsColor: ['#008080','#111111','#006A00','#008080'],
       verticalCentered: true,
       paddingBottom: '4em'
   });

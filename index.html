@@ -48,25 +48,26 @@
             <figcaption>Figure 2: Histogram of Not Trees data on 0th Axis, RGB values</figcaption>
           </figure>
           </div>
-          <p>Unfortunately, the shapes of my histograms are too close to really differentiate.</p>
+          <p>Unfortunately, the shapes of my histograms are too close to really differentiate. I also tried this while converting the RGB values to spherical coordinates, with similar results.</p>
         </div>
         <div class="slide">
-          <p>So let's try some texture analysis then</p>
+          <p>So let's try some filters then!</p>
           <div class="analysis-mgs">
             <figure>
             <img src="src/img/analysis/mask.png" alt="Locations of trees on one image">
-            <figcaption>Figure 3: Locations of trees on one image</figcaption>
+            <figcaption>Figure 3: Locations of trees on one image (image mask)</figcaption>
           </figure>
           <figure>
-            <img src="src/img/analysis/corr.png" alt="Hits for texture analysis">
-            <figcaption>Figure 4: Hits for texture analysis</figcaption>
+            <img src="src/img/analysis/dorr.png" alt="Hits for fractional power filter">
+            <figcaption>Figure 4: Hits for fractional power filter (alpha = 0.65)</figcaption>
           </figure>
           </div>
-          <p>This isn't terrible until you get to the cities, where it really has trouble telling trees from non-trees.</p>
+          <p>Kinser (2010) describes Fractional Power Filters as a means to detect similar shapes regardless of size, rotation, and location. I tried this approach and achieved mild success. About 70% of my hits were true positives.</p>
         </div>
-        <div class="slide">
-
-        </div>
+      </div>
+      <div class="section">
+        <h2>Future Work</h2>
+        <p>When I get back to this dataset, I plan to attempt texture analysis, and eventually neural networks.</p>
       </div>
     </div>
   </body>
