@@ -14,7 +14,7 @@ $(document).ready(function () {
     data.forEach(function (folder, i) {
       var slide = d3.select('#s' + (i + 1) + ' .fp-tableCell');
 
-      var imagePath = imagePaths.find(function (imagePath) {
+      var imagePath = $.grep(imagePaths, function (imagePath) {
         return imagePath.includes(folder.foldername);
       });
 

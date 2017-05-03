@@ -13,7 +13,8 @@
     "babel-cli": "~6.24.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src/js/main.js -o build/js/main.js"
   },
   "repository": {
     "type": "git",

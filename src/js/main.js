@@ -20,7 +20,7 @@ $(document).ready(function() {
     data.forEach((folder, i) => {
     let slide = d3.select('#s'+(i+1) + ' .fp-tableCell');
 
-    let imagePath = imagePaths.find(imagePath => imagePath.includes(folder.foldername));
+    let imagePath = $.grep(imagePaths, imagePath => imagePath.includes(folder.foldername));
 
     let imgContainer = slide.append('div')
     .attr('class', 'd3-img-container');
