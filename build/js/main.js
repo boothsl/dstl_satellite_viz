@@ -15,7 +15,7 @@ $(document).ready(function () {
       var slide = d3.select('#s' + (i + 1) + ' .fp-tableCell');
 
       var imagePath = $.grep(imagePaths, function (imagePath) {
-        return imagePath.includes(folder.foldername);
+        return imagePath.indexOf(folder.foldername) !== -1;
       });
 
       var imgContainer = slide.append('div').attr('class', 'd3-img-container');
