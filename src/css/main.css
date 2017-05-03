@@ -3,19 +3,16 @@ svg {
   width: 100%;
 }
 .analysis-mgs {
-  text-align: justify;
+  text-align: center;
   margin: 30px auto 30px auto;
+  max-width: 1000px;
   width: 80%;
 }
-.analysis-mgs::after {
-  content: "";
-  display: inline-block;
-  width: 100%;
-}
+
 .analysis-mgs figure{
   color: white;
   display:inline-block;
-  margin: auto;
+  margin: 0px 10px 0px 10px;
 }
 figure img{
   max-width: 400px;
